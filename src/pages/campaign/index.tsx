@@ -1,20 +1,17 @@
 import React from 'react'
-import { api } from '../../api'
+import { useAppDispatch, useShallowEqualSelector } from '../../hooks/redux-typed-hooks'
 
-const getAllCampagins = async () => {
-  return await api.campaigns.getAllCamps()
-}
+const Campaigns = async () => {
+  const dispatch = useAppDispatch()
+  const { data: camps } = useShallowEqualSelector(s => s.campaigns)
 
-const index = async () => {
-  const  camps = await getAllCampagins()
   return (
     <div>
-      
-      {camps.map(i => (
+      {camps.map((i: any) => (
         <div key={i.id}>{i.name}</div>
       ))}
     </div>
   )
 }
 
-export default index
+export default Campaigns

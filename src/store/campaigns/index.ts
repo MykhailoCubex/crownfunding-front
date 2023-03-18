@@ -11,17 +11,17 @@ const campaign = createSlice({
   name: 'campaign',
   initialState: { data: [], current: {}, loading: false } as CampaignInterface,
   reducers: {
-    getAllCampsRequest: (state, action) => {
+    getAllCampsRequest: (state) => {
       state.loading = true
     },
     getAllCampsSuccess: (state, action) => {
-      state.data.push(action.payload)
+      state.data = action.payload
       state.loading = false
     },
     getAllCampsError: state => {
       state.loading = false
     },
-    getCampByIdRequest: (state, action) => {
+    getCampByIdRequest: (state) => {
       state.loading = true
     },
     getCampByIdSuccess: (state, action) => {
@@ -31,7 +31,7 @@ const campaign = createSlice({
     getCampByIdError: state => {
       state.loading = false
     },
-    createCampRequest: (state, action) => {
+    createCampRequest: (state) => {
       state.loading = true
     },
     createCampSuccess: (state, action) => {
@@ -50,10 +50,10 @@ export const {
   getAllCampsError,
   getCampByIdRequest,
   getCampByIdSuccess,
-  getCampByIdError, 
+  getCampByIdError,
   createCampRequest,
   createCampSuccess,
-  createCampError
+  createCampError,
 } = campaign.actions
 
 export default campaign.reducer

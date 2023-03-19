@@ -15,7 +15,7 @@ const campaign = createSlice({
       state.loading = true
     },
     getAllCampsSuccess: (state, action) => {
-      state.data = action.payload
+      state.data = action.payload.data
       state.loading = false
     },
     getAllCampsError: state => {

@@ -4,14 +4,16 @@ import Card from '@mui/material/Card'
 import { Router } from '@mui/icons-material'
 import { useAppDispatch } from '@app/hooks/redux-typed-hooks'
 import { useRouter } from 'next/router'
+import { getCampByIdRequest } from '../../../store/campaigns'
 
 const CampsCard = (data: any) => {
-    const dispatch = useAppDispatch()
-    const router = useRouter()
-    
-    const { name, goal, balance, id } = data.data
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+
+  const { name, goal, balance, id, status } = data.data
   const handleDonate = () => {
-    router.push(`/${id}`)
+    router.push(`/campaign/${id}`)
+    dispatch(getCampByIdRequest(id))
   }
 
   return (
@@ -20,12 +22,15 @@ const CampsCard = (data: any) => {
         {name}
       </Typography>
       <Typography variant="h5" component="div">
-        Gaol: {goal} USD
+        <Status status={status}>{status}</Status>
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Goal: {goal} USD
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
         Balance: {balance} USD
       </Typography>
-      <DonateButton id={id} variant="contained" color="error" onClick={handleDonate}>
+      <DonateButton id={id} variant="contained" color="success" onClick={handleDonate}>
         Donate
       </DonateButton>
     </Container>
@@ -57,4 +62,8 @@ const DonateButton = styled(Button)`
     cursor: pointer;
     scale: 1.05;
   }
+`
+
+const Status = styled('p')<{ status: string }>`
+  color: ${props => (props.status === 'fraud' ? 'red' : 'green')};
 `

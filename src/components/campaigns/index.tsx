@@ -19,6 +19,6 @@ export default Campaigns
 const Container = styled('div')`
   display: flex;
   width: 100%;
-  flex-direction: column;
+  gap: 10px;
   padding: 40px;
 `

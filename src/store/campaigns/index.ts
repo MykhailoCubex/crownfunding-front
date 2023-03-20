@@ -21,11 +21,11 @@ const campaign = createSlice({
     getAllCampsError: state => {
       state.loading = false
     },
-    getCampByIdRequest: (state) => {
+    getCampByIdRequest: (state, action) => {
       state.loading = true
     },
     getCampByIdSuccess: (state, action) => {
-      state.current = action.payload
+      state.current = action.payload.data
       state.loading = false
     },
     getCampByIdError: state => {
@@ -41,6 +41,16 @@ const campaign = createSlice({
     createCampError: state => {
       state.loading = false
     },
+    createDonationRequest: (state, action) => {
+      state.loading = true
+    },
+    createDonationSuccess: (state) => {
+      state.loading = false
+    },
+    createDonationError: state => {
+      state.loading = false
+    },
+
   },
 })
 
@@ -54,6 +64,9 @@ export const {
   createCampRequest,
   createCampSuccess,
   createCampError,
+  createDonationRequest,
+  createDonationSuccess,
+  createDonationError
 } = campaign.actions
 
 export default campaign.reducer

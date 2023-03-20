@@ -1,5 +1,15 @@
 import { all, put, takeLatest, call } from 'redux-saga/effects'
-import { getAllCampsSuccess, getAllCampsError, getCampByIdSuccess, getCampByIdError, createCampSuccess, createCampError } from './index'
+import {
+  getAllCampsSuccess,
+  getAllCampsError,
+  getCampByIdSuccess,
+  getCampByIdError,
+  createCampSuccess,
+  createCampError,
+  createDonationRequest,
+  createDonationSuccess,
+  createDonationError,
+} from './index'
 import { api } from '@app/api/index'
 
 function* getAllCampsWorker(): Generator {
@@ -31,11 +41,22 @@ function* createCampWorker(action: any): Generator {
   }
 }
 
+function* createDonation(action: any): Generator {
+  const { nickname, amount, campaignId } = action.payload
+  try {
+    yield call(api.users.createUser, { nickname, amount, campaignId })
+    yield put(createDonationSuccess())
+  } catch (error) {
+    yield put(createDonationError())
+  }
+}
+
 function* campsSaga() {
   yield all([
     takeLatest('campaign/getAllCampsRequest', getAllCampsWorker),
     takeLatest('campaign/getCampByIdRequest', getCampByIdWorker),
     takeLatest('campaign/createCampRequest', createCampWorker),
+    takeLatest('campaign/createDonationRequest', createDonation),
   ])
 }
 

@@ -19,7 +19,6 @@ const Campaign = () => {
       amount: 0,
     },
     onSubmit: async (values: Partial<UsersModel>) => {
-      console.log(values)
       await dispatch(createDonationRequest({ ...values, campaignId: id }))
       await dispatch(getCampByIdRequest(id))
     },
@@ -50,13 +49,20 @@ const Campaign = () => {
       )}
       <StyledFrom onSubmit={formik.handleSubmit}>
         <TextField
+          label="nickname"
           name="nickname"
           id="nickname"
           type="text"
           value={formik.values.nickname}
           onChange={formik.handleChange}
         />
-        <TextField name="amount" id="amount" type="number" onChange={formik.handleChange} />
+        <TextField
+          label="amount (USD)"
+          name="amount"
+          id="amount"
+          type="number"
+          onChange={formik.handleChange}
+        />
         <SubmitButton variant="contained" type="submit">
           Donate
         </SubmitButton>
@@ -67,16 +73,16 @@ const Campaign = () => {
 
 export default Campaign
 
-const Camp = styled('div')`
+export const Camp = styled('div')`
   padding: 20px;
   margin: 0 auto;
 `
 
-const SubmitButton = styled(Button)`
+export const SubmitButton = styled(Button)`
   color: #fff;
 `
 
-const StyledFrom = styled('form')`
+export const StyledFrom = styled('form')`
   display: flex;
   align-items: center;
   justify-content: center;

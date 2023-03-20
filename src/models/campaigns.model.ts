@@ -1,4 +1,4 @@
-import { UsersModel } from "./users.model"
+import { UsersModel } from './users.model'
 
 export enum StatusEnum {
   Active = 'active',
@@ -11,6 +11,7 @@ export interface CampsModel {
   name: string
   goal: number
   balance: number
+  description: string
   status: StatusEnum
   users: UsersModel[]
 }

@@ -31,11 +31,11 @@ const campaign = createSlice({
     getCampByIdError: state => {
       state.loading = false
     },
-    createCampRequest: (state) => {
+    createCampRequest: (state, action) => {
       state.loading = true
     },
     createCampSuccess: (state, action) => {
-      state.current = action.payload
+      state.data.push(action.payload.data)
       state.loading = false
     },
     createCampError: state => {

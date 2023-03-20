@@ -32,9 +32,9 @@ function* getCampByIdWorker(action: any): Generator {
 }
 
 function* createCampWorker(action: any): Generator {
-  const { name, description, goal, status } = action.payload
+  const { name, description, goal } = action.payload
   try {
-    const camp = yield call(api.campaigns.createCamp, { name, description, goal, status })
+    const camp = yield call(api.campaigns.createCamp, { name, description, goal })
     yield put(createCampSuccess(camp))
   } catch (error) {
     yield put(createCampError())
